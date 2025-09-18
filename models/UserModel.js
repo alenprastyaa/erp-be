@@ -19,13 +19,13 @@ const User = db.define("user", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  Role: {
-    type: DataTypes.INTEGER,
+  role_name: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
 });
 
-Role.hasMany(User, { foreignKey: "role_id" });
-User.belongsTo(Role, { foreignKey: "role_id" });
+Role.hasMany(User, { foreignKey: "role_name" });
+User.belongsTo(Role, { foreignKey: "role_name" });
 
 module.exports = User;
