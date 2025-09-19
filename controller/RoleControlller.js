@@ -45,13 +45,17 @@ const DeleteRole = async (req, res) => {
 const UpdateRole = async (req, res) => {
   try {
     const { role_name } = req.params;
+    const { expected_check_in_time } = req.body;
     const chekRole = await Role.findOne({ where: { role_name } });
     if (!chekRole) {
       return res.status(400).json({ message: "Role tidak tersedia" });
     }
-    await Role.update({
-      role_name,
-    });
+    const update = await Role.update(
+      { expected_check_in_time },
+      {
+        where: { role_name },
+      }
+    );
     res.status(200).json({ message: "Role Berhasil di Update" });
   } catch (error) {
     res.status(400).json({ message: error.message });
