@@ -6,12 +6,13 @@ const {
   UpdateDetailCompany,
   DeleteDetailCompany,
 } = require("../controller/DetailCompanyController");
+const { AdminMiddleware } = require("../middleware/auth");
 
 const router = express.Router();
-router.get("/", GetDetailCompanies);
-router.get("/:id", GetDetailCompanyById);
-router.post("/", CreateDetailCompany);
-router.put("/:id", UpdateDetailCompany);
-router.delete("/:id", DeleteDetailCompany);
+router.get("/", AdminMiddleware, GetDetailCompanies);
+router.get("/:id", AdminMiddleware, GetDetailCompanyById);
+router.post("/", AdminMiddleware, CreateDetailCompany);
+router.put("/:id", AdminMiddleware, UpdateDetailCompany);
+router.delete("/:id", AdminMiddleware, DeleteDetailCompany);
 
 module.exports = router;

@@ -7,11 +7,12 @@ const {
   UpdateBankAccount,
   DeleteBankAccount,
 } = require("../controller/BankAccountController");
+const { AdminMiddleware } = require("../middleware/auth");
 
-router.get("/", GetBankAccounts);
-router.get("/:id", GetBankAccountById);
-router.post("/", CreateBankAccount);
-router.put("/:id", UpdateBankAccount);
-router.delete("/:id", DeleteBankAccount);
+router.get("/", AdminMiddleware, GetBankAccounts);
+router.get("/:id", AdminMiddleware, GetBankAccountById);
+router.post("/", AdminMiddleware, CreateBankAccount);
+router.put("/:id", AdminMiddleware, UpdateBankAccount);
+router.delete("/:id", AdminMiddleware, DeleteBankAccount);
 
 module.exports = router;

@@ -7,11 +7,12 @@ const {
   UpdateEdukasi,
   DeleteEdukasi,
 } = require("../controller/EdukasiController");
+const { AdminMiddleware } = require("../middleware/auth");
 
-router.get("/", GetEdukasies);
-router.get("/:id", GetEdukasiById);
-router.post("/", CreateEdukasi);
-router.put("/:id", UpdateEdukasi);
-router.delete("/:id", DeleteEdukasi);
+router.get("/", AdminMiddleware, GetEdukasies);
+router.get("/:id", AdminMiddleware, GetEdukasiById);
+router.post("/", AdminMiddleware, CreateEdukasi);
+router.put("/:id", AdminMiddleware, UpdateEdukasi);
+router.delete("/:id", AdminMiddleware, DeleteEdukasi);
 
 module.exports = router;

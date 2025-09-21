@@ -5,11 +5,12 @@ const {
   CreateProjek,
   AddEmployeToProject,
 } = require("../controller/ProjekController");
+const { AdminMiddleware } = require("../middleware/auth");
 const router = express.Router();
 
-router.get("/", GetProjects);
-router.get("/:id", GetProjectById);
-router.post("/", CreateProjek);
-router.post("/add/employee", AddEmployeToProject);
+router.get("/", AdminMiddleware, GetProjects);
+router.get("/:id", AdminMiddleware, GetProjectById);
+router.post("/", AdminMiddleware, CreateProjek);
+router.post("/add/employee", AdminMiddleware, AddEmployeToProject);
 
 module.exports = router;
