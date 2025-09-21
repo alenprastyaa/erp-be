@@ -8,8 +8,8 @@ const {
 const { AdminMiddleware } = require("../middleware/auth");
 const router = express.Router();
 
-router.get("/", AdminMiddleware, GetRole);
-router.post("/", AdminMiddleware, CreateRole);
+router.get("/", GetRole);
+router.post("/", CreateRole);
 router.delete("/:role_name", AdminMiddleware, DeleteRole);
 router.put("/:role_name", AdminMiddleware, UpdateRole);
 
