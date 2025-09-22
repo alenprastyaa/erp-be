@@ -8,7 +8,7 @@ router.get("/", AdminMiddleware, GetPermissions)
 router.get("/:id", AdminMiddleware, GetPermissionById)
 router.post("/", AdminMiddleware, CreatePermission)
 router.delete("/:id", AdminMiddleware, DeletePermission)
-router.put("/:id", UpdatePermission)
+router.put("/:id", AdminMiddleware, UpdatePermission)
 router.post("/my/permission", AuthMiddleare, CreateEmployeAbsensi)
 router.get("/my/permission", AuthMiddleare, GetMyPermission)
 

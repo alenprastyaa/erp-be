@@ -27,6 +27,7 @@ const AuthMiddleare = (req, res, next) => {
         })
     }
 }
+
 const AdminMiddleware = (req, res, next) => {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
@@ -35,7 +36,7 @@ const AdminMiddleware = (req, res, next) => {
     }
     jwt.verify(
         token,
-        "34534sdfsdrfwe5wefdsfaeerqr332r43Sds",
+        "secretkey",
         (err, decoded) => {
             if (err) {
                 return res.status(403).json({ message: "Token tidak valid" });

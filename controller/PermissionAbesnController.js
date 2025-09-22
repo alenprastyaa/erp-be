@@ -77,7 +77,7 @@ const CreatePermission = async (req, res) => {
 
 const CreateEmployeAbsensi = async (req, res) => {
     try {
-        const employeeId = req.user.employee_id;
+        const employeeId = req.user.id;
         const { date_start, date_end, type, reason } = req.body;
         if (!date_start || !date_end || !type || !reason) {
             return res.status(400).json({
@@ -145,18 +145,17 @@ const GetMyPermission = async (req, res) => {
         })
     }
 }
+
 const UpdatePermission = async (req, res) => {
     try {
         const { id } = req.params;
         const { date_start, date_end, type, reason, status } = req.body;
-
         const permission = await AbsencePermission.findByPk(id);
         if (!permission) {
             return res
                 .status(404)
                 .json({ success: false, message: "Izin absen tidak ditemukan" });
         }
-
         await permission.update({
             date_start,
             date_end,
@@ -164,7 +163,6 @@ const UpdatePermission = async (req, res) => {
             reason,
             status,
         });
-
         res.status(200).json({
             success: true,
             message: "Izin absen berhasil diperbarui",
