@@ -10,6 +10,7 @@ const DetailCompaniesRoutes = require("./routes/DetailCompanyRoutes");
 const EdukasiRoutes = require("./routes/EdukasiRoutes");
 const BankAccountRoutes = require("./routes/BankAccountRoutes");
 const ProjekRoutes = require("./routes/ProjekRoutes");
+const PermissionRoutes = require('./routes/PermisiionRoutes')
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Tes Koneksi" });
 });
@@ -26,6 +27,7 @@ const startApp = () => {
     app.use("/api/edukasi", EdukasiRoutes);
     app.use("/api/bank/account", BankAccountRoutes);
     app.use("/api/detail/companie", DetailCompaniesRoutes);
+    app.use("/api/permission", PermissionRoutes)
     app.use("/api/projek", ProjekRoutes);
     app.listen(port, () => {
       console.log("Aplikasi Berjalan di port : ", port);

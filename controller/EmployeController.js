@@ -2,8 +2,7 @@ const Employee = require("../models/Employee");
 const DetailCompany = require("../models/DetailCompanyModel");
 const Role = require("../models/RoleModel");
 const jwt = require('jsonwebtoken')
-
-
+const bcrypt = require("bcrypt");
 
 const GetEmployee = async (req, res) => {
   try {
@@ -129,8 +128,8 @@ const DeleteEmployee = async (req, res) => {
 
 const LoginEmployee = async (req, res) => {
   try {
-    const { email, date_of_birth } = req.body
-    if (!email || !date_of_birth) {
+    const { email, password } = req.body
+    if (!email || !password) {
       return res.status(400).json({
         success: false,
         message: "Harap Lengkapi email dan tanggal lahir"
@@ -143,19 +142,15 @@ const LoginEmployee = async (req, res) => {
         message: "Email Tidak Ditemukan"
       })
     }
-    const employeeDob = new Date(employee.date_of_birth);
-    const inputDob = new Date(date_of_birth);
-    if (employeeDob.getTime() !== inputDob.getTime()) {
-      return res.status(400).json({
-        success: false,
-        message: "Tanggal lahir salah"
-      });
+    const match = await bcrypt.compare(password, employee.password);
+    if (!match) {
+      return res.status(400).json({ message: "Password salah" });
     }
     const token = jwt.sign(
       {
         id: employee.id,
         username: employee.username,
-        role_nam: employee.role_nam,
+        role_name: employee.role_name,
         employee_id: employee.employee_id,
       },
       process.env.JWT_SECRET || "secretkey",
