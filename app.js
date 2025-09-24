@@ -11,10 +11,12 @@ const EdukasiRoutes = require("./routes/EdukasiRoutes");
 const BankAccountRoutes = require("./routes/BankAccountRoutes");
 const ProjekRoutes = require("./routes/ProjekRoutes");
 const PermissionRoutes = require('./routes/PermisiionRoutes')
+const cors = require('cors')
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Tes Koneksi" });
 });
 app.use(express.json());
+app.use(cors())
 
 const startApp = () => {
   try {
